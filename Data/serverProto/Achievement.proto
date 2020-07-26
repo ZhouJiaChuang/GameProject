@@ -1,0 +1,9 @@
+package Achievement;
+
+option java_package = "com.zjc.game.proto";
+option java_outer_classname = "AchievementProtos";
+
+message AchievementData
+{
+	required int32 EQUIPMAXCOUNT = 1;
+}

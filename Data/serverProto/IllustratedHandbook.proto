@@ -1,0 +1,9 @@
+package IllustratedHandbook;
+
+option java_package = "com.zjc.game.proto";
+option java_outer_classname = "IllustratedHandbookProtos";
+
+message IllustratedHandbookData
+{
+	required int32 EQUIPMAXCOUNT = 1;
+}

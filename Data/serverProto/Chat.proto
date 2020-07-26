@@ -1,0 +1,12 @@
+package Chat;
+
+option java_package = "com.zjc.game.proto";
+option java_outer_classname = "UserProtos";
+
+message UnitChatMsg
+{
+	required string speaker = 1;
+	required string receiver = 2;
+	required string msgKey = 3;
+	required string msg = 4;
+}
