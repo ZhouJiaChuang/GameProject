@@ -1,2 +1,8 @@
 Library
 Temp
+.vs
+obj
+Client/Branch/Project/Assembly-CSharp-Editor-firstpass.csproj
+Client/Branch/Project/Assembly-CSharp-firstpass.csproj
+Client/Branch/Project/Assembly-CSharp.csproj
+Client/Branch/Project/Project.sln
