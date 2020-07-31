@@ -13,4 +13,5 @@ using UnityEngine;
 /// </summary>
 public class Action_Move : CSActionBase
 {
+    public CSAvater Avater;
 }

@@ -4,6 +4,7 @@
  * Function:
  * 
  */
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,14 +14,27 @@ using UnityEngine;
 /// </summary>
 public class CSGame : MonoBehaviour
 {
+    private static CSGame _Instance;
+
+    public static CSGame Instance
+    {
+        get { return _Instance; }
+    }
+
+    public EResourceLoadType ResourceLoadType = EResourceLoadType.Normal;
+
+    public GameObject UIRoot;
+
     private void Awake()
     {
+        _Instance = this;
         DontDestroyOnLoad(this);
         CreateAllManagerInstance();
     }
 
     void Start()
     {
+        UIManager.Instance.CreatePanel<UILoginPanel>();
     }
 
     public void CreateAllManagerInstance()
@@ -28,5 +42,15 @@ public class CSGame : MonoBehaviour
         UIManager.Instance.SetParent(transform);
         CSSceneManager.Instance.SetParent(transform);
         CSPluginsManager.Instance.SetParent(transform);
+        CSResourceManager.Instance.SetParent(transform);
+
+        UIManager.Instance.SetUIRoot(UIRoot);
+
+        CSResourceManager.Instance.AddQueue("5", EResourceType.Body, OnLoaded, EResourceAssistType.Player);
+    }
+
+    private void OnLoaded(CSResource obj)
+    {
+        GameObject.Instantiate(obj.MirrorObj);
     }
 }

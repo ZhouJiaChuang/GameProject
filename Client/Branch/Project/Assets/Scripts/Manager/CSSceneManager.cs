@@ -12,6 +12,6 @@ using UnityEngine;
 /// 场景管理类
 /// 用来切换场景
 /// </summary>
-public class CSSceneManager : SingtonMono<CSSceneManager>
+public class CSSceneManager : SingletonMono<CSSceneManager>
 {
 }

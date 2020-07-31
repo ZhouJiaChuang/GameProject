@@ -15,6 +15,6 @@ using UnityEngine;
 /// 2.语音插件
 /// 3.推送插件
 /// </summary>
-public class CSPluginsManager : SingtonMono<CSPluginsManager>
+public class CSPluginsManager : SingletonMono<CSPluginsManager>
 {
 }
