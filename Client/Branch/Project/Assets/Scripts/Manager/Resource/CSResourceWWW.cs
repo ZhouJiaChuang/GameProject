@@ -57,72 +57,93 @@ public class CSResourceWWW : CSResource
         {
             CSGame.Instance.StopCoroutine(mCoroutine);
         }
-        mCoroutine = CSGame.Instance.StartCoroutine(GetData(path));
-    }
 
-    private IEnumerator GetData(string path)
-    {
         if (!IsAssetBundle(LocalType))
         {
-            using (UnityWebRequest www = UnityWebRequest.Get(path))
-            {
-                yield return www.SendWebRequest();
-
-                if (www.isNetworkError || www.isHttpError)
-                {
-                    if (CSGame.Instance.ResourceLoadType == EResourceLoadType.Local)
-                    {
-                        OnLoadedErrorProc();
-                    }
-                    else
-                    {
-                        DealNeedWaitHotUpdate();
-                    }
-                }
-                else
-                {
-                    MirroyBytes = www.downloadHandler.data;
-                    LoadFinish();
-
-                }
-            }
+            mCoroutine = CSGame.Instance.StartCoroutine(GetData(path));
         }
         else
         {
-            using (UnityWebRequest www = UnityWebRequestAssetBundle.GetAssetBundle(path))
-            {
-                yield return www.SendWebRequest();
+            mCoroutine = CSGame.Instance.StartCoroutine(GetAssetBundleData(path));
+        }
+    }
 
-                if (www.isNetworkError || www.isHttpError)
+    /// <summary>
+    /// 加载数据资源
+    /// </summary>
+    /// <param name="path"></param>
+    /// <returns></returns>
+    private IEnumerator GetData(string path)
+    {
+        using (UnityWebRequest www = UnityWebRequest.Get(path))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.isNetworkError || www.isHttpError)
+            {
+                if (CSGame.Instance.ResourceLoadType == EResourceLoadType.Local)
                 {
-                    if (CSGame.Instance.ResourceLoadType == EResourceLoadType.Local)
-                    {
-                        OnLoadedErrorProc();
-                    }
-                    else
-                    {
-                        DealNeedWaitHotUpdate();
-                    }
+                    OnLoadedErrorProc();
                 }
                 else
                 {
-                    try
-                    {
-                        assetBundle = assetBundle != null ? assetBundle : DownloadHandlerAssetBundle.GetContent(www);
-                    }
-                    catch (System.Exception ex)
-                    {
-                        UnityEngine.Debug.LogError(ex.Message);
-                        OnLoadedErrorProc();
-                        yield break;
-                    }
-                    yield return SyncLoadMainAsset(true);
+                    DealNeedWaitHotUpdate();
                 }
             }
+            else
+            {
+                MirroyBytes = www.downloadHandler.data;
+                LoadFinish();
+
+            }
         }
-           
     }
 
+    /// <summary>
+    /// 加载AB资源
+    /// </summary>
+    /// <param name="path"></param>
+    /// <returns></returns>
+    private IEnumerator GetAssetBundleData(string path)
+    {
+        using (UnityWebRequest www = UnityWebRequestAssetBundle.GetAssetBundle(path))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.isNetworkError || www.isHttpError)
+            {
+                if (CSGame.Instance.ResourceLoadType == EResourceLoadType.Local)
+                {
+                    OnLoadedErrorProc();
+                }
+                else
+                {
+                    DealNeedWaitHotUpdate();
+                }
+            }
+            else
+            {
+                try
+                {
+                    assetBundle = assetBundle != null ? assetBundle : DownloadHandlerAssetBundle.GetContent(www);
+                }
+                catch (System.Exception ex)
+                {
+                    UnityEngine.Debug.LogError(ex.Message);
+                    OnLoadedErrorProc();
+                    yield break;
+                }
+                yield return SyncLoadMainAsset(true);
+            }
+        }
+
+    }
+
+    /// <summary>
+    /// 异步读取AB内的资源
+    /// </summary>
+    /// <param name="isFromLocalLoad"></param>
+    /// <returns></returns>
     private IEnumerator SyncLoadMainAsset(bool isFromLocalLoad = false)
     {
         string[] strs = assetBundle.GetAllAssetNames();
@@ -175,7 +196,7 @@ public class CSResourceWWW : CSResource
     }
 
     /// <summary>
-    /// 添加到下周队列中
+    /// 添加到下载队列中
     /// </summary>
     private void DownloadFromServer()
     {
