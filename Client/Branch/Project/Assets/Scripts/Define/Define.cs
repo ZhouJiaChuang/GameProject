@@ -26,7 +26,7 @@ public enum ESceneType
     /// <summary>
     /// 主要的游戏场景
     /// </summary>
-    MainScene
+    GameScene
 }
 
 /// <summary>
@@ -133,7 +133,7 @@ public enum EResourceType
     /// <summary>
     /// 场景文件
     /// </summary>
-    Scene,
+    SceneRes,
     /// <summary>
     /// 贴图
     /// </summary>

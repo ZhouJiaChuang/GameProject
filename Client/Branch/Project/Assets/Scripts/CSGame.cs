@@ -52,5 +52,7 @@ public class CSGame : MonoBehaviour
     private void OnLoaded(CSResource obj)
     {
         GameObject.Instantiate(obj.MirrorObj);
+
+        CSSceneManager.Instance.Load(ESceneType.GameScene);
     }
 }
