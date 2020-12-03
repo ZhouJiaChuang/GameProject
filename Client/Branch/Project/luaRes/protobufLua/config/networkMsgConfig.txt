@@ -1,0 +1,6 @@
+﻿--[[本文件为工具自动生成,禁止手动修改]]
+101#OnResConnectSuccessMessageReceived
+102#OnResConnectFailedMessageReceived
+1002#OnResLoginAccountReceived
+1004#OnResLoginServerReceived
+2001#OnResPlayerBasicInfoMessageReceived

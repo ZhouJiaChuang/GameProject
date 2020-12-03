@@ -40,9 +40,10 @@ public class UIManager : SingletonMono<UIManager>
         CreatePanelByType(type, action);
     }
 
-    public void CreatePanelByName(string name, System.Action<UIBase> action = null)
+    public GameObject CreatePanelByName(string name, System.Action<UIBase> action = null)
     {
-
+        GameObject go = CSResourceManager.Instance.loadUIPanel(name);
+        return go;
     }
 
     public void CreatePanelByType(Type type, System.Action<UIBase> action = null)
@@ -188,6 +189,29 @@ public class UIManager : SingletonMono<UIManager>
 
     public void ClosePanel<T>()
     {
+        ClosePanel(typeof(T));
+    }
+
+    public void ClosePanel(Type type)
+    {
+        UIBase panel = null;
+        for (int i = 0; i < ShowPaneList.Count; i++)
+        {
+            UIBase ins = ShowPaneList[i];
+            if (ins != null)
+            {
+                if (ins.GetType() == type)
+                {
+                    Pop(ins);
+
+                    panel = ins;
+
+                    GameObject.Destroy(panel.gameObject);
+                    break;
+                }
+            }
+        }
+
 
     }
 

@@ -111,6 +111,12 @@ public class DoAssetbundle
             EditorUtility.DisplayProgressBar("正在启动打Assetbundle逻辑，请稍等", "正在启动打Assetbundle逻辑，请稍等...", 1);
             Caching.ClearCache();
             string path = uiAssetBundlesPath + (isSelect ? "Select/" : "");
+            if (string.IsNullOrEmpty(path))
+            {
+                EditorUtility.ClearProgressBar();
+                return;
+            }
+
             Utility.DetectCreateDirectory(path);
             //打包资源
             BuildPipeline.BuildAssetBundles(path, BuildAssetBundleOptions.ChunkBasedCompression, EditorUserBuildSettings.activeBuildTarget);

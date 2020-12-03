@@ -15,7 +15,10 @@ public class GMToolPanel : CSEditorWindow
 
     protected override void InitToolDic()
     {
-        AddTool(new ProjectPathEditorTool());
+        AddToolBar("GM命令栏", new GMOrderTool());
+        AddToolBar("道具生成工具", new GMItemGenerateTool());
+        AddToolBar("单位生成工具", new GMAvaterGenerateTool());
+        AddToolBar("游戏信息监听", new GMGameInfoListeningTool());
+        AddToolBar("其他", new GMOtherExtendTool());
     }
-
 }

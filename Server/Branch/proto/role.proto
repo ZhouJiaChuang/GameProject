@@ -1,0 +1,28 @@
+package role;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "RoleProto";
+
+
+//玩家基本数据
+message ResPlayerBasicInfo {
+  optional string name = 1;
+  optional int64 roleId = 2; //角色ID
+  repeated PlayerAttribute attr = 3;//属性 对应AttributeType
+  optional int32 x = 4;
+  optional int32 y = 5;
+  optional int32 z = 6;
+}
+
+message PlayerAttribute {
+  required int32 type = 1; //属性类型
+  required int64 num = 2; //属性值
+}
+
+enum AttributeType {
+  NULL = 0;
+  Hp = 1;//血量
+  MaxHp = 2;//血量
+  Mp = 3;//血量
+  MaxMp = 4;//魔法
+}

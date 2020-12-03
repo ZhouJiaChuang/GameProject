@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<messages id="2" queueId="2" package="com.sh.game.msg.system.role">
+
+    <message id="1" type="toClient" class="ResPlayerBasicInfoMessage" proto="true" desc="玩家基本数据">
+        <proto name="com.sh.game.proto.RoleProto.ResPlayerBasicInfo"/>
+    </message>
+
+</messages>

@@ -8,4 +8,12 @@ public interface IEditorTool
     /// 界面刷新
     /// </summary>
     void OnGUI();
+    /// <summary>
+    /// 数据保存
+    /// </summary>
+    void Save();
+    /// <summary>
+    /// 数据读取
+    /// </summary>
+    void Load();
 }

@@ -175,10 +175,74 @@ public enum EEditorPath
     /// 空
     /// </summary>
     None,
+
+    /// <summary>
+    /// 客户端的资源读取根目录
+    /// 本地的所有路径正常情况下都是根据根目录做对应的相对路径的
+    /// </summary>
+    ClientLoadRootPath,
+
     /// <summary>
     /// 本地资源加载路径
     /// </summary>
     LocalResourcesLoadPath,
+
+    /// <summary>
+    /// 本地表格存放路径
+    /// </summary>
+    LocalTablePath,
+    /// <summary>
+    /// 本地表格数据存放路径
+    /// </summary>
+    LocalTableBytesPath,
+    /// <summary>
+    /// 表格的proto路径
+    /// </summary>
+    LocalTableProtoPath,
+    /// <summary>
+    /// 表格的proto所生成的代码路径
+    /// </summary>
+    LocalTableProtoClassPath,
+
+    /// <summary>
+    /// 本地服务器proto存放路径
+    /// </summary>
+    LocalServerProtoPath,
+    /// <summary>
+    /// 本地服务器proto对应的XML文件路径
+    /// 协议工具根据这个自动生成对应的方法与请求
+    /// </summary>
+    LocalServerProtoXMLPath,
+
+    /// <summary>
+    /// 服务器的proto生成的CS代码路径
+    /// </summary>
+    LocalServerProtoClassPath,
+
+    /// <summary>
+    /// 服务器的protoXML生成的方法代码路径
+    /// </summary>
+    LocalServerProtoFunctionPath,
+
+    /// <summary>
+    /// 服务器的数据资源的根目录
+    /// 客户端根据情况,可能会从服务器资源目录中同步表格或者proto文件
+    /// </summary>
+    ServerResourceRootPath,
+    /// <summary>
+    /// 外部真正的服务器proto存放路径
+    /// 正常开发的情况下,服务器修改的proto都存放到这里,客户端通过工具拷贝到本地服务器proto存放路径
+    /// </summary>
+    RealServerProtoPath,
+    /// <summary>
+    /// 外部真正的服务器protoXML存放路径
+    /// 正常开发的情况下,服务器修改的proto都存放到这里,客户端通过工具拷贝到本地服务器protoXML存放路径
+    /// </summary>
+    RealServerProtoXMLPath,
+    /// <summary>
+    /// lua的目录
+    /// </summary>
+    LuaPath,
 }
 
 public enum EUILayerType
@@ -255,4 +319,141 @@ public enum EResourceLoadType
     /// 在Android上就是Android/data/data/包名/files/
     /// </summary>
     Normal,
+}
+
+/// <summary>
+/// 动作
+/// </summary>
+public enum CSMotion
+{
+    //一个持续的状态动作
+    No = -1,
+    Static = 0,         // 无
+    NPCShow = 3,        //NPC展示
+    Run = 10,            // 跑步
+    Walk = 11,           // 走路
+    Mining1 = 12,         // 挖矿
+    Dead = 13,           // 死亡
+    ShowStand = 14,      // 展示
+    Mining2 = 15,         //采集动作2
+    Stand = 16,          // 待机
+    Mining3 = 17,
+    RunOverDoSmoething = 20,//跑过去做一些东西
+    Show1 = 21,
+    Show2 = 22,
+    Show3 = 23,
+
+    //Trriger,每次只播放一次的动作
+    Born,
+    AttackStartIndex = 30,//攻击动作的开始下标,也是进行攻击的状态
+    /// <summary>
+    /// 普通攻击动作
+    /// </summary>
+    Attack1 = 31,
+    /// <summary>
+    /// 施法举手攻击
+    /// </summary>
+    Attack2 = 32,
+    /// <summary>
+    /// 斜劈攻击动作
+    /// </summary>
+    Attack3 = 33,
+    /// <summary>
+    /// 冲撞动作
+    /// </summary>
+    Attack4 = 34,
+    /// <summary>
+    /// 跳斩斩动作
+    /// </summary>
+    Attack5 = 35,
+    /// <summary>
+    /// 旋风斩动作
+    /// </summary>
+    Attack6 = 36,
+    /// <summary>
+    /// 秘能爆发
+    /// </summary>
+    Attack7 = 37,
+    /// <summary>
+    /// 暴风雪,飞天施法
+    /// </summary>
+    Attack8 = 38,
+    /// <summary>
+    /// 爆裂神符
+    /// </summary>
+    Attack9 = 39,
+    /// <summary>
+    /// 召唤群兽
+    /// </summary>
+    Attack10 = 40,
+    //不知道什么时候有要加,避免改C#  提前预留好坑位
+    Attack11 = 41,
+    Attack12 = 42,
+    Attack13 = 43,
+    Attack14 = 44,
+    Attack15 = 45,
+    Attack16 = 46,
+    Attack17 = 47,
+    Attack18 = 48,
+    Attack19 = 49,
+
+    BeAttack = 50,       // 被击
+    Take = 51,//动物动作
+    Stand2 = 52,//战斗待机
+
+    Sworn1 = 55,//结义动作1(端酒)
+    Sworn2 = 56,//结义动作2(喝酒)
+    Marry1 = 57,//结婚动作1
+    Marry2 = 58,//结婚动作2
+    Fish1 = 59,//钓鱼动作1
+    Fish2 = 60,//钓鱼动作2
+    Fish3 = 61,//钓鱼动作3
+    Xiagui1 = 62,//下跪动作
+    Xiagui2 = 63,//站起来
+    Xiagui3 = 64,//持续下跪
+    Zhuangqiang = 65,//撞墙
+    Shuaidao = 66,//摔倒
+    Sworn3 = 67,//结义动作3,(端酒持续)
+}
+
+/// <summary>
+/// 朝向
+/// </summary>
+public enum CSDirection //移动方向
+{
+    Up,                 // 上    0
+    Right_Up,           // 右上   1
+    Right,              // 右    2
+    Right_Down,         // 右下   3
+    Down,               // 下     4
+    Left_Down,          // 左下   5
+    Left,               // 左    6
+    Left_Up,            // 左上   7
+    Custom,             // 自定义
+    None,
+}
+
+/// <summary>
+/// 模型身体结构
+/// 同结构下,同时仅仅只能存在一个插件
+/// 并且所有组件必须基于Body存在
+/// </summary>
+public enum EModelStructure
+{
+    /// <summary>
+    /// 身体
+    /// </summary>
+    Body = 1,
+    /// <summary>
+    /// 头发
+    /// </summary>
+    Hair = 2,
+    /// <summary>
+    /// 左手
+    /// </summary>
+    LeftHand = 3,
+    /// <summary>
+    /// 右手
+    /// </summary>
+    RightHand = 4,
 }

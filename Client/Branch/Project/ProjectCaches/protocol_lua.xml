@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<ProtocolControlCache_ServerMessage xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <messages>
+    <ProtocolControlCache_Message>
+      <hasProto>false</hasProto>
+      <xmlName />
+      <messageName>ResConnectSuccessMessage</messageName>
+      <messageID>101</messageID>
+      <messageDescription>客户端链接服务器成功</messageDescription>
+      <messageDirection>ToClient</messageDirection>
+      <isMessageDealInXLua>true</isMessageDealInXLua>
+      <isNeedSendBacktoCSharp>false</isNeedSendBacktoCSharp>
+      <unableToOptimise>false</unableToOptimise>
+      <protoData />
+    </ProtocolControlCache_Message>
+    <ProtocolControlCache_Message>
+      <hasProto>false</hasProto>
+      <xmlName />
+      <messageName>ResConnectFailedMessage</messageName>
+      <messageID>102</messageID>
+      <messageDescription>客户端链接服务器失败</messageDescription>
+      <messageDirection>ToClient</messageDirection>
+      <isMessageDealInXLua>true</isMessageDealInXLua>
+      <isNeedSendBacktoCSharp>false</isNeedSendBacktoCSharp>
+      <unableToOptimise>false</unableToOptimise>
+      <protoData />
+    </ProtocolControlCache_Message>
+    <ProtocolControlCache_Message>
+      <hasProto>true</hasProto>
+      <xmlName>account</xmlName>
+      <messageName>ReqLoginAccount</messageName>
+      <messageID>1001</messageID>
+      <messageDescription>请求登入账号</messageDescription>
+      <messageDirection>ToServer</messageDirection>
+      <isMessageDealInXLua>true</isMessageDealInXLua>
+      <isNeedSendBacktoCSharp>false</isNeedSendBacktoCSharp>
+      <unableToOptimise>false</unableToOptimise>
+      <protoData>
+        <protoName>account</protoName>
+        <protoMsgName>AccountLoginReqData</protoMsgName>
+      </protoData>
+    </ProtocolControlCache_Message>
+    <ProtocolControlCache_Message>
+      <hasProto>false</hasProto>
+      <xmlName>account</xmlName>
+      <messageName>ResLoginAccount</messageName>
+      <messageID>1002</messageID>
+      <messageDescription>返回登入账号信息</messageDescription>
+      <messageDirection>ToClient</messageDirection>
+      <isMessageDealInXLua>true</isMessageDealInXLua>
+      <isNeedSendBacktoCSharp>false</isNeedSendBacktoCSharp>
+      <unableToOptimise>false</unableToOptimise>
+      <protoData />
+    </ProtocolControlCache_Message>
+    <ProtocolControlCache_Message>
+      <hasProto>false</hasProto>
+      <xmlName>account</xmlName>
+      <messageName>ReqLoginServer</messageName>
+      <messageID>1003</messageID>
+      <messageDescription>请求登入服务器</messageDescription>
+      <messageDirection>ToServer</messageDirection>
+      <isMessageDealInXLua>true</isMessageDealInXLua>
+      <isNeedSendBacktoCSharp>false</isNeedSendBacktoCSharp>
+      <unableToOptimise>false</unableToOptimise>
+      <protoData />
+    </ProtocolControlCache_Message>
+    <ProtocolControlCache_Message>
+      <hasProto>false</hasProto>
+      <xmlName>account</xmlName>
+      <messageName>ResLoginServer</messageName>
+      <messageID>1004</messageID>
+      <messageDescription>返回服务器信息</messageDescription>
+      <messageDirection>ToClient</messageDirection>
+      <isMessageDealInXLua>true</isMessageDealInXLua>
+      <isNeedSendBacktoCSharp>false</isNeedSendBacktoCSharp>
+      <unableToOptimise>false</unableToOptimise>
+      <protoData />
+    </ProtocolControlCache_Message>
+    <ProtocolControlCache_Message>
+      <hasProto>true</hasProto>
+      <xmlName>role</xmlName>
+      <messageName>ResPlayerBasicInfoMessage</messageName>
+      <messageID>2001</messageID>
+      <messageDescription>玩家基本数据</messageDescription>
+      <messageDirection>ToClient</messageDirection>
+      <isMessageDealInXLua>true</isMessageDealInXLua>
+      <isNeedSendBacktoCSharp>false</isNeedSendBacktoCSharp>
+      <unableToOptimise>false</unableToOptimise>
+      <protoData>
+        <protoName>role</protoName>
+        <protoMsgName>ResPlayerBasicInfo</protoMsgName>
+      </protoData>
+    </ProtocolControlCache_Message>
+  </messages>
+</ProtocolControlCache_ServerMessage>

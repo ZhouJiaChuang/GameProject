@@ -35,6 +35,7 @@ public class CSResourceWWW : CSResource
     /// </summary>
     private void CallBack()
     {
+        if (base.onLoaded == null) return;
         try
         {
             base.onLoaded.CallBack(this);
@@ -171,8 +172,9 @@ public class CSResourceWWW : CSResource
     {
         IsDone = true;
 
-        CallBack();
         CSResourceManager.Instance.WWWLoaded(this);
+
+        CallBack();
     }
 
     /// <summary>

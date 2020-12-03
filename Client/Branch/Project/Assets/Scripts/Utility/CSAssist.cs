@@ -22,12 +22,24 @@ public class CSAssist
     }
 
     private static Quaternion DefalutQuaternion = Quaternion.Euler(0, 0, 0);
-    public static void SetParent(Transform parent, GameObject c)
+    public static void SetParent(Transform parent, GameObject c, bool IsResetRect = false)
     {
         Transform trans = c.transform;
-        trans.parent = parent;
+        trans.SetParent(parent);
         trans.localScale = Vector3.one;
         trans.localPosition = Vector3.zero;
         trans.localRotation = DefalutQuaternion;
+
+        if (IsResetRect)
+        {
+            RectTransform rectTransform = trans.GetComponent<RectTransform>();
+            if (rectTransform != null)
+            {
+                rectTransform.anchorMax = Vector2.one;
+                rectTransform.anchorMin = Vector2.zero;
+                rectTransform.offsetMax = Vector2.zero;
+                rectTransform.offsetMin = Vector2.zero;
+            }
+        }
     }
 }

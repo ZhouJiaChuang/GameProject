@@ -1,0 +1,119 @@
+
+package TABLE;
+
+message ItemDrop
+{
+    enum ProbType
+    {
+        PROB_TYPE_EQUAL     = 1;
+        PROB_TYPE_SPECIFIED = 2;
+    }
+
+    message Drop
+    {
+        required uint32 id          = 1;
+        required uint32 count       = 2;
+        optional uint32 prob        = 3;
+        optional uint32 max_times   = 4;    // 最大掉落次数
+    }
+
+    optional ProbType   prob_type   = 1 [default = PROB_TYPE_SPECIFIED];
+    repeated Drop       drop_list   = 2;
+}
+
+message Range
+{
+    enum RangeType
+    {
+        RANGE_TYPE_INVALID          = 0;
+        RANGE_TYPE_CLOSED_CLOSED    = 1;
+        RANGE_TYPE_CLOSED_OPEN      = 2;
+        RANGE_TYPE_OPEN_CLOSED      = 3;
+        RANGE_TYPE_OPEN_OPEN        = 4;
+    }
+
+    optional RangeType  range_type  = 1;
+    optional uint32     lhs         = 2;
+    optional uint32     rhs         = 3;
+}
+
+message ActivityAwardList
+{
+    message ActivityAward
+    {
+        optional uint32     item_id     = 1;
+        optional uint32     item_count  = 2;
+        optional uint32     lev         = 3;
+    }
+    repeated ActivityAward  award       = 1;
+}
+
+message IntPair
+{
+	optional uint32  first       = 1;
+	optional uint32  second      = 2;
+}
+
+message IntPairList
+{
+    repeated IntPair list   = 1;
+}
+
+message IntPairList2
+{
+    repeated IntPair list   = 1;
+}
+
+message IntList
+{
+    repeated int32	list	= 1;
+}
+
+message StringList
+{
+    repeated string	list	= 1;
+}
+
+message IntListJingHao
+{
+    repeated int32 list   = 1;
+}
+
+message IntListXiaHuaXian
+{
+    repeated uint32 list   = 1;
+}
+
+message IntListXiaHuaXianFenHao
+{
+    repeated IntListXiaHuaXian list   = 1;
+}
+
+message IntListJingHaoMeiYuan
+{
+    repeated IntListJingHao list   = 1;
+}
+
+message IntListList
+{
+	repeated IntList list	= 1;
+}
+
+message IntSpecXiaHuaJinHao
+{
+    optional uint32 value0 = 1;
+	repeated uint32 list	= 3;
+}
+
+message IntTupleList
+{
+	message IntTuple 
+	{
+		optional int64 first = 1;
+		optional int64 second = 2;
+		optional int64 third = 3;
+	}
+
+	repeated IntTuple list = 1;
+}
+

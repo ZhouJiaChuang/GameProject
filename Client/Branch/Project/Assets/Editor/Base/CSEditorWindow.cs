@@ -29,6 +29,7 @@ public abstract class CSEditorWindow : EditorWindow
     
     public List<IEditorTool> testList = new List<IEditorTool>();
     public Dictionary<int, List<IEditorTool>> BarToolsDic = new Dictionary<int, List<IEditorTool>>() { };
+
     protected virtual void OnGUI()
     {
         GUIWindow.DrawSeparator();
@@ -94,5 +95,16 @@ public abstract class CSEditorWindow : EditorWindow
 
         BarToolsDic[key].Add(tool);
         testList.Add(tool);
+    }
+
+    public void Save()
+    {
+        foreach (var bar in BarToolsDic)
+        {
+            for (int i = 0; i < bar.Value.Count; i++)
+            {
+                bar.Value[i].Save();
+            }
+        }
     }
 }

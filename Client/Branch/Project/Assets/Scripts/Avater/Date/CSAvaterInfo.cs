@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,11 +25,23 @@ public class CSAvaterInfo
     /// 单位的名字
     /// </summary>
     public string Name;
-    
+    /// <summary>
+    /// 等级
+    /// </summary>
+    public int Level;
+
     public EAutoState AutoState = EAutoState.None;
 
     public CSAvaterInfo(CSAvater avater)
     {
         this.Avater = avater;
+    }
+
+    public void Update()
+    {
+    }
+
+    public virtual void Init(object data)
+    {
     }
 }

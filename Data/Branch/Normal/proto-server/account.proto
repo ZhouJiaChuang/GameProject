@@ -1,0 +1,10 @@
+package account;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "AccountProto";
+
+message AccountLoginReqData {
+  required int32 type = 1; //类型: 0:编辑器模式唯一ID登入  1:正常账号密码登入  2:手机号验证码登入
+  required string account = 2;//根据类型,存在不同的账号数据
+  option string password = 3;//类型0的情况下,不需要密码
+}

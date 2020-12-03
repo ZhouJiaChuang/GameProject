@@ -9,9 +9,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 
+/// 一个模型控制结构为:
+/// Avater(MonoBehaviour)类
+///    AvaterModel 控制Avater挂载点的坐标位移/坐标旋转/模型创建/模型动作
+///    AvaterInfo  记录Avater的数据信息
+/// 在Avater初始化的时候,从缓存池中获取到没有使用的Avater类
+/// 如果Avater当前不存在挂载点(新创建的Avater),那么克隆该单位,并挂载到对应世界节点下面
 /// </summary>
-public abstract class CSAvater : MonoBehaviour
+public class CSAvater : MonoBehaviour
 {
     private GameObject _Go;
     public GameObject Go
@@ -29,11 +34,11 @@ public abstract class CSAvater : MonoBehaviour
         get { return _Info; }
     }
 
-    public CSAvaterModel _Model;
+    public ICSAvaterModel _Model;
     /// <summary>
     /// 单位模型
     /// </summary>
-    public CSAvaterModel Model
+    public ICSAvaterModel Model
     {
         set { _Model = value; }
         get { return _Model; }
@@ -60,6 +65,9 @@ public abstract class CSAvater : MonoBehaviour
     }
 
     private CSObjectPoolItem mPoolItem;
+    /// <summary>
+    /// 自己Avater类在缓存池中的缓存对象,用来在自身销毁的时候,移除到缓存池中
+    /// </summary>
     public CSObjectPoolItem PoolItem
     {
         get { return mPoolItem; }
@@ -68,19 +76,52 @@ public abstract class CSAvater : MonoBehaviour
 
     public CSAvater()
     {
-        Info = new CSAvaterInfo(this);
-        Model = new CSAvaterModel(this);
-        SkillEngine = new CSSkillEngine(this);
-        CreateAvaterGo();
     }
-
-    private void CreateAvaterGo()
+    #region Avater实例化
+    public static CSAvater Create<T>() where T : CSAvater
     {
-        _Go = new GameObject();
-        AddAvaterToGo(Go);
+        GameObject _Go = new GameObject();
+        CSAvater avater = _Go.AddComponent<T>();
+        avater.InitAvaterToGo(_Go);
+
+        return avater;
     }
 
-    protected abstract void AddAvaterToGo(GameObject obj);
+    /// <summary>
+    /// 必要执行
+    /// </summary>
+    /// <param name="obj"></param>
+    protected virtual void InitAvaterToGo(GameObject go)
+    {
+        _Go = go;
+    }
+
+    /// <summary>
+    /// 初始化创建
+    /// </summary>
+    public virtual void InitCreate()
+    {
+        SkillEngine = new CSSkillEngine(this);
+    }
+
+    #endregion
+
+    #region Avater个体初始化
+    public void InitData(object data)
+    {
+        Info.Init(data);
+    }
+
+    #endregion
+
+    public void Update()
+    {
+        Info.Update();
+
+        Model.Update();
+
+        SkillEngine.Update();
+    }
 }
 
 namespace BehaviorDesigner.Runtime

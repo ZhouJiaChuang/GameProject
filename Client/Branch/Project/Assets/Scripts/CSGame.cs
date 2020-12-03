@@ -32,27 +32,22 @@ public class CSGame : MonoBehaviour
         CreateAllManagerInstance();
     }
 
-    void Start()
-    {
-        UIManager.Instance.CreatePanel<UILoginPanel>();
-    }
-
     public void CreateAllManagerInstance()
     {
         UIManager.Instance.SetParent(transform);
+        UIManager.Instance.SetUIRoot(UIRoot);
+
         CSSceneManager.Instance.SetParent(transform);
         CSPluginsManager.Instance.SetParent(transform);
         CSResourceManager.Instance.SetParent(transform);
-
-        UIManager.Instance.SetUIRoot(UIRoot);
-
-        CSResourceManager.Instance.AddQueue("5", EResourceType.Body, OnLoaded, EResourceAssistType.Player);
+        XLuaManager.Instance.SetParent(transform);
     }
 
-    private void OnLoaded(CSResource obj)
+    void Start()
     {
-        GameObject.Instantiate(obj.MirrorObj);
+        CSNetwork.Instance.EventProcess = new JCNetEventProcess();
 
-        CSSceneManager.Instance.Load(ESceneType.GameScene);
+        XLuaManager.Instance.Init();
     }
+
 }

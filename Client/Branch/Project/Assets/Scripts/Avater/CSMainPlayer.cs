@@ -2,11 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CSMainPlayer : CSAvater
+public class CSMainPlayer : CSPlayer
 {
-    protected override void AddAvaterToGo(GameObject obj)
+    protected override void InitAvaterToGo(GameObject go)
     {
-        obj.AddComponent<CSMainPlayer>();
-        obj.AddComponent<BehaviorDesigner.Runtime.BehaviorTree>();
+        //go.AddComponent<BehaviorDesigner.Runtime.BehaviorTree>();
+    }
+
+    public override void InitCreate()
+    {
+        base.InitCreate();
+
+        Info = new CSMainPlayerInfo(this);
+        Model = new CSMainPlayerModel(this);
     }
 }

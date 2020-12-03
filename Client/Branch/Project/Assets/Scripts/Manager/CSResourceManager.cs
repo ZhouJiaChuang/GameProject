@@ -87,7 +87,8 @@ public class CSResourceManager : SingletonMono<CSResourceManager>
     /// <param name="assistType">资源加载优先级</param>
     /// <param name="isPath">是否为全路径</param>
     /// <returns></returns>
-    public CSResource AddQueue(string name, EResourceType type, CSEventDelegate<CSResource>.OnLoaded onLoadCallBack, EResourceAssistType assistType, bool isFullPath = false)
+    public CSResource AddQueue(string name, EResourceType type, CSEventDelegate<CSResource>.OnLoaded onLoadCallBack, EResourceAssistType assistType, bool isFullPath = false,
+        object param = null)
     {
         string path = isFullPath ? name : CSResource.GetPath(name, type, false);
 
@@ -122,25 +123,27 @@ public class CSResourceManager : SingletonMono<CSResourceManager>
 
             AddWaitingQueueDic(res);
             AdjustProri(res);
+        }
 
-            if (onLoadCallBack != null)
+        if (onLoadCallBack != null)
+        {
+            if (res.IsDone)
             {
-                if (res.IsDone)
+                if (onLoadCallBack != null)
                 {
-                    if (onLoadCallBack != null)
-                    {
-                        onLoadCallBack(res);
-                    }
+                    onLoadCallBack(res);
                 }
-                else
-                {
-                    res.onLoaded -= onLoadCallBack;
-                    res.onLoaded += onLoadCallBack;
-                }
+            }
+            else
+            {
+                res.onLoaded -= onLoadCallBack;
+                res.onLoaded += onLoadCallBack;
             }
         }
 
-        return null;
+        res.Param = param;
+
+        return res;
     }
 
     /// <summary>
@@ -150,6 +153,7 @@ public class CSResourceManager : SingletonMono<CSResourceManager>
     /// <returns></returns>
     public CSResource GetLoadedRes(string path)
     {
+        if (string.IsNullOrEmpty(path)) return null;
         CSResource res;
         if (loadedQueue.TryGetValue(path, out res))
         {
@@ -165,6 +169,7 @@ public class CSResourceManager : SingletonMono<CSResourceManager>
     /// <returns></returns>
     public CSResource GetLoadingRes(string path)
     {
+        if (string.IsNullOrEmpty(path)) return null;
         if (loadingQueue.ContainsKey(path))
         {
             return loadingQueue[path];
@@ -179,6 +184,7 @@ public class CSResourceManager : SingletonMono<CSResourceManager>
     /// <returns></returns>
     public CSResource GetWaitingQueueRes(string path)
     {
+        if (string.IsNullOrEmpty(path)) return null;
         if (waitingQueueDic.ContainsKey(path))
         {
             return waitingQueueDic[path];

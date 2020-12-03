@@ -11,6 +11,6 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-public class SVNUtility : MonoBehaviour
+public class SVNUtility
 {
 }

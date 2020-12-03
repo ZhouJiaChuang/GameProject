@@ -1,0 +1,15 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_GLOBAL
+{
+	required int32 id = 1;//id#客户端#C#不存在共同参与合并的字段  每个id程序单独写死
+	required string type = 2;//分类标记#客户端#C  目前仅策划使用
+	required string value = 3;//参数#客户端#C  参数为对应内容参数
+	optional string remarks = 4;//说明#客户端#C  该项的功能说明
+}
+
+message CFG_GLOBALARRAY
+{
+	repeated CFG_GLOBAL rows = 1;
+}

@@ -4,6 +4,7 @@
  * Function:
  * 
  */
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,5 +24,9 @@ public class CSSkillEngine
     public CSSkillEngine(CSAvater avater)
     {
         this.Avater = avater;
+    }
+
+    public void Update()
+    {
     }
 }

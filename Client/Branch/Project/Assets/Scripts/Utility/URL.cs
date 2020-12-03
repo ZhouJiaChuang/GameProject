@@ -39,6 +39,7 @@ public class URL
     private static string _LocalProjectPath;
     /// <summary>
     /// 工程路径
+    /// Application.dataPath去掉了/Assets
     /// </summary>
     public static string LocalProjectPath
     {
@@ -53,7 +54,7 @@ public class URL
     }
 
     /// <summary>
-    /// 项目名字
+    /// 项目文件夹名字
     /// </summary>
     private static string _LocalProjectName = string.Empty;
     public static string LocalProjectName

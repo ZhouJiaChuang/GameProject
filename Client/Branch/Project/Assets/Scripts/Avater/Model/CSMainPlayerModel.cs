@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CSMainPlayerModel : MonoBehaviour
+public class CSMainPlayerModel : CSAvaterModel3D
 {
-    // Start is called before the first frame update
-    void Start()
+    public CSMainPlayerModel(CSAvater Avater) : base(Avater)
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void Analyze()
     {
-        
+        base.BeginAnalyze();
+
+        Load(10, EModelStructure.Body, CSMotion.Stand, CSDirection.None, EResourceType.Body, EResourceAssistType.Player);
+
+        base.EndAnalyze();
     }
 }

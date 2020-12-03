@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<messages id="1" queueId="2" package="com.sh.game.msg.system.account">
+
+    <message id="1" type="toServer" class="ReqLoginAccount" proto="true" desc="请求登入账号">
+		<proto name="com.sh.game.proto.AccountProto.AccountLoginReqData"/>
+    </message>
+	
+	<message id="2" type="toClient" class="ResLoginAccount" proto="true" desc="返回登入账号信息">
+    </message>
+	
+	<message id="3" type="toServer" class="ReqLoginServer" proto="true" desc="请求登入服务器">
+    </message>
+	
+	<message id="4" type="toClient" class="ResLoginServer" proto="true" desc="返回服务器信息">
+    </message>
+
+</messages>

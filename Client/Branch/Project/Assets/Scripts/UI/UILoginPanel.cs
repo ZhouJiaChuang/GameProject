@@ -11,7 +11,7 @@ public class UILoginPanel : UIBase
     {
         get
         {
-            return _Btn_EditorLogin ? _Btn_EditorLogin : (_Btn_EditorLogin = transform.Find("Widget/Editor/Btn_EditorLogin").GetComponent<Button>());
+            return Get<Button>("Widget/Editor/Btn_EditorLogin");
         }
     }
     public void Start()
@@ -24,6 +24,12 @@ public class UILoginPanel : UIBase
 
     public void OnClickBtn()
     {
-        UnityEngine.Debug.LogError("1");
+        CSSceneManager.Instance.Load(ESceneType.GameScene, null, null, OnLoadedGameScene);
+    }
+
+    private void OnLoadedGameScene()
+    {
+        UIManager.Instance.ClosePanel<UILoginPanel>();
+        UIManager.Instance.CreatePanel<UIMainMenuPanel>();
     }
 }

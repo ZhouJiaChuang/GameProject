@@ -124,10 +124,10 @@ public class CSSceneManager : SingletonMono<CSSceneManager>
 
         if (!System.IO.File.Exists(fliePath))
         {
-            if (CSDebug.developerConsoleVisible)
-            {
-                CSDebug.Log("path is not exsit=" + fliePath);
-            }
+            //if (CSDebug.developerConsoleVisible)
+            //{
+            //    CSDebug.Log("path is not exsit=" + fliePath);
+            //}
 
             yield break;
         }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -37,7 +38,8 @@ public class CSEditorPath
 
     public void Save()
     {
-        txt = txt.Replace("\\", "/");
+        if (!string.IsNullOrEmpty(txt))
+            txt = txt.Replace("\\", "/");
         if (Directory.Exists(txt) && txt.LastIndexOf("/") != txt.Length - 1)
         {
             txt = txt + "/";
@@ -75,61 +77,34 @@ public class CSEditorPath
             return;
         }
 
-        string initPath = "";
-        initPath = EditorPath_LocalResourcesLoadPath;
-        AddPath(EEditorPath.LocalResourcesLoadPath, initPath);
-        //initPath = EditorPath.GetBackDir(Application.dataPath, 4) + "/Data/Branch/CurrentUseData/Normal/tableV2/";
-        //AddPath(EEditorPath.ExcelTablePath, initPath);
-        //initPath = EditorPath.GetBackDir(Application.dataPath, 4) + "/Data/Branch/CurrentUseData/Normal/proto-table/";
-        //AddPath(EEditorPath.TableProtoSavePath, initPath);
+        AddPath(EEditorPath.LocalServerProtoClassPath);
+        AddPath(EEditorPath.LocalTableProtoClassPath);
+        AddPath(EEditorPath.LuaPath);
+        AddPath(EEditorPath.ClientLoadRootPath);
+        AddPath(EEditorPath.LocalResourcesLoadPath);
+        AddPath(EEditorPath.LocalTableProtoPath);
+        AddPath(EEditorPath.LocalServerProtoPath);
+        AddPath(EEditorPath.LocalServerProtoXMLPath);
+        
+        AddPath(EEditorPath.LocalServerProtoFunctionPath);
+        AddPath(EEditorPath.LocalTablePath);
+        AddPath(EEditorPath.LocalTableBytesPath);
 
-        //string curPath = Application.dataPath;
-
-        //string path = "Client/Branch/" + EditorPath.LocalProjectName + "/Assets";
-
-        //if (curPath.Contains(path))
-        //{
-        //    initPath = CSInterfaceSingleton.Unity_Editor.EditorPath_TableBytePath(Application.dataPath, path);
-        //}
-        //AddPath(EEditorPath.TableBytePath, initPath);
-
-        //initPath = EditorPath.GetBackDir(Application.dataPath, 4) + "/ClassLibrary_wzcq3D/ClassLibrary_Public/Proto/protobufProduce/ClientProto/"; ;
-        //AddPath(EEditorPath.ClientTableProCS_SavePath, initPath);
-
-        //initPath = EditorPath.GetBackDir(Application.dataPath, 4) + "/Data/Branch/CurrentUseData/Normal/proto-server/";
-        //AddPath(EEditorPath.ServerProtoSavePath, initPath);
-        //initPath = EditorPath.GetBackDir(Application.dataPath, 4) + "/ClassLibrary_wzcq3D/ClassLibrary_Public/Proto/protobufProduce/ServerProto/"; ;
-        //AddPath(EEditorPath.ServerProCS_SavePath, initPath);
-        //initPath = EditorPath.GetBackDir(Application.dataPath, 6) + "/Wz2gData/trunk/proto/"; ;
-        //AddPath(EEditorPath.ServerProtocolProtoPath, initPath);
-        //initPath = EditorPath.GetBackDir(Application.dataPath, 6) + "/Wz2gData/trunk/xml/"; ;
-        //AddPath(EEditorPath.ServerProtocolXMLPath, initPath);
-        //initPath = Application.dataPath + "/Script/Network/MsgGen/";
-        //AddPath(EEditorPath.MsgGenPath, initPath);
-
-        //initPath = "";
-        //AddPath(EEditorPath.ProjectOverridePath, initPath);
-
-        //initPath = "";
-        //AddPath(EEditorPath.ProjectOverrideName, initPath);
-
-
-        //initPath = EditorPath.GetBackDir(Application.dataPath, 1) + "/luaRes/";
-        //AddPath(EEditorPath.LuaPath, initPath);
-        //initPath = Application.dataPath.Replace("/Client/Branch/ClientProject/Assets", "/Tool/ExcelTool/ExcelTool.exe");
-        //AddPath(EEditorPath.ExcelTranslateToolFile, initPath);
+        AddPath(EEditorPath.RealServerProtoPath);
+        AddPath(EEditorPath.RealServerProtoXMLPath);
     }
 
-    private static void AddPath(EEditorPath type, string initPath)
+    private static void AddPath(EEditorPath type)
     {
         string path = PlayerPrefs.GetString(GetKeyPath(type));
         if (string.IsNullOrEmpty(path))
         {
-            path = initPath;
+            path = GetDefaultPath(type);
         }
 
-        pathDic.Add(type, path);
-        PlayerPrefs.SetString(CSEditorPath.GetKeyPath(type), path);
+        pathDic[type] = path;
+
+        PlayerPrefs.SetString(GetKeyPath(type), path);
     }
 
     public static string GetPath(EEditorPath type)
@@ -138,8 +113,11 @@ public class CSEditorPath
         {
             InitPath();
         }
-
-        return pathDic[type];
+        string path = string.Empty;
+        if (pathDic.TryGetValue(type, out path))
+        {
+        }
+        return path;
     }
 
     public static void SavePath(EEditorPath type, string path)
@@ -156,12 +134,61 @@ public class CSEditorPath
         PlayerPrefs.SetString(CSEditorPath.GetKeyPath(type), path);
     }
 
-    public static string EditorPath_LocalResourcesLoadPath
+    private static string GetDefaultPath(EEditorPath type)
     {
-        get
+        string path = string.Empty;
+        switch (type)
         {
-            string _LocalResourcesLoadPath = System.Text.RegularExpressions.Regex.Replace(Application.dataPath, "Client/(\\w+)/" + URL.LocalProjectName + "/Assets", "Data/$1/CurrentUseData/Normal/wzcq_android/");
-            return _LocalResourcesLoadPath;
+            case EEditorPath.LocalTableProtoClassPath:
+                path = Application.dataPath + "/Scripts/Proto/Table/";
+                break;
+            case EEditorPath.LocalServerProtoClassPath:
+                path = Application.dataPath + "/Scripts/Proto/Server/";
+                break;
+
+            case EEditorPath.LocalServerProtoFunctionPath:
+                path = Application.dataPath + "/Scripts/Proto/ServerGen/";
+                break;
+
+            case EEditorPath.ClientLoadRootPath:
+
+                path = System.Text.RegularExpressions.Regex.Replace(Application.dataPath, "Client/(\\w+)/" + URL.LocalProjectName + "/Assets",
+                    "Data/$1/Normal/");
+                break;
+
+            case EEditorPath.LocalResourcesLoadPath:
+                path = System.Text.RegularExpressions.Regex.Replace(Application.dataPath, "Client/(\\w+)/" + URL.LocalProjectName + "/Assets",
+                    "Data/$1/Normal/android/");
+                break;
+
+            case EEditorPath.LocalTableProtoPath:
+                path = System.Text.RegularExpressions.Regex.Replace(Application.dataPath, "Client/(\\w+)/" + URL.LocalProjectName + "/Assets",
+                    "Data/$1/Normal/proto-table/");
+                break;
+
+            case EEditorPath.LocalServerProtoPath:
+                path = System.Text.RegularExpressions.Regex.Replace(Application.dataPath, "Client/(\\w+)/" + URL.LocalProjectName + "/Assets",
+                    "Data/$1/Normal/proto-server/");
+                break;
+            case EEditorPath.LocalServerProtoXMLPath:
+                path = System.Text.RegularExpressions.Regex.Replace(Application.dataPath, "Client/(\\w+)/" + URL.LocalProjectName + "/Assets",
+                    "Data/$1/Normal/proto-server-xml/");
+                break;
+
+            case EEditorPath.LocalTablePath:
+                path = System.Text.RegularExpressions.Regex.Replace(Application.dataPath, "Client/(\\w+)/" + URL.LocalProjectName + "/Assets",
+                    "Data/$1/Normal/table/");
+                break;
+            case EEditorPath.LocalTableBytesPath:
+                path = System.Text.RegularExpressions.Regex.Replace(Application.dataPath, "Client/(\\w+)/" + URL.LocalProjectName + "/Assets",
+                    "Data/$1/Normal/android/table/");
+                break;
+            case EEditorPath.LuaPath:
+                path = URL.LocalProjectPath+ "/luaRes/";
+                break;
+
+                
         }
+        return path;
     }
 }

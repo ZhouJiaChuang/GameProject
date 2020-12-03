@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ProtocolControlCache_ServerProtocol xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <protocols>
+    <ProtocolControlCache_Protocol>
+      <protocolName>账号</protocolName>
+      <xmlName>account</xmlName>
+      <isProtocolUsedInLua>true</isProtocolUsedInLua>
+    </ProtocolControlCache_Protocol>
+    <ProtocolControlCache_Protocol>
+      <protocolName>角色</protocolName>
+      <xmlName>role</xmlName>
+      <isProtocolUsedInLua>true</isProtocolUsedInLua>
+    </ProtocolControlCache_Protocol>
+  </protocols>
+</ProtocolControlCache_ServerProtocol>

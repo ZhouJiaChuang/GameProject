@@ -84,6 +84,8 @@ public class CSResource
         get { return _IsHotLoading; }
     }
 
+    public object Param;
+
     public CSEventDelegate<CSResource> onLoaded = new CSEventDelegate<CSResource>();
 
     public CSResource(string name, string path, EResourceType type)
@@ -151,14 +153,19 @@ public class CSResource
         string t = "";
         switch (type)
         {
-            case EResourceType.UIEffect: return t = "Model/Effect/";
-            case EResourceType.Body: return t = "Model/Body/";
+            case EResourceType.UIEffect: return t = "model/effect/";
+            case EResourceType.Body: return t = "model/body/";
             default:
                 break;
         }
         return t;
     }
 
+    /// <summary>
+    /// 根据资源的类型判定是ab资源还是数据
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns></returns>
     public static bool IsAssetBundle(EResourceType type)
     {
         switch (type)
@@ -167,5 +174,32 @@ public class CSResource
                 return false;
         }
         return true;
+    }
+
+    /// <summary>
+    /// 得到该资源的对象池个体(如果对象池内没有剩余可使用的,会新增)
+    /// </summary>
+    /// <param name="removeTime">在获取的同时,设置移除的时间</param>
+    /// <returns></returns>
+    public CSObjectPoolItem GetPoolItem(EPoolType type = EPoolType.Normal, int MaxLimitCount = 0, 
+        float removeTime = 0, EPoolItemRemoveMethod removeMethod = EPoolItemRemoveMethod.None)
+    {
+        GameObject go = MirrorObj as GameObject;
+        if (go == null || CSObjectPoolMgr.Instance == null)
+        {
+            return null;
+        }
+        CSObjectPoolItem mPoolItem = CSObjectPoolMgr.Instance.GetAndAddPoolItem_GameObject(go.name, Path, go, false, type);
+        if (mPoolItem == null) return null;
+        if (removeTime != 0)
+        {
+            CSObjectPoolMgr.Instance.SetPoolRemoveTime(mPoolItem, removeTime);
+        }
+        if (removeMethod != EPoolItemRemoveMethod.None && mPoolItem.owner != null)
+        {
+            mPoolItem.owner.RemoveMethod = removeMethod;
+        }
+        return mPoolItem;
+
     }
 }

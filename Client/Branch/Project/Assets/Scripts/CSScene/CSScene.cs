@@ -9,6 +9,12 @@ using UnityEngine;
 /// </summary>
 public class CSScene : Singleton<CSScene>
 {
+    /// <summary>
+    /// 主角信息类
+    /// 每次切换场景的时候,主角模型会进行销毁,但是数据属性始终存在
+    /// </summary>
+    public static CSMainPlayerInfo MainPlayerInfo = null;
+
     public Dictionary<long, CSAvater> AvatersID = new Dictionary<long, CSAvater>();
     public Dictionary<int, Dictionary<long, CSAvater>> AvaterDic = new Dictionary<int, Dictionary<long, CSAvater>>();
 
@@ -28,7 +34,7 @@ public class CSScene : Singleton<CSScene>
 
     private void BindEvent()
     {
-        SocketEventHandler.AddEvent(ESocketEvent.ResUpdateViewMessage, OnResUpdateViewMessage);
+        SocketEventHandler.AddEvent(ESocketEvent.ResUpdateViewPlayerMessage, OnResUpdateViewMessage);
     }
 
 
@@ -62,7 +68,7 @@ public class CSScene : Singleton<CSScene>
     /// <param name="data"></param>
     private void OnResUpdateViewMessage(uint uiEvtID, object[] data)
     {
-
+        ProcessAvatarEnterView<CSMainPlayer>(0001, null, EAvaterType.MainPlayer);
     }
 
     /// <summary>
@@ -72,7 +78,7 @@ public class CSScene : Singleton<CSScene>
     /// <param name="id"></param>
     /// <param name="data"></param>
     /// <param name="type"></param>
-    public virtual void ProcessAvatarEnterView<T>(long id, object data, EAvaterType type) where T : CSAvater
+    public virtual void ProcessAvatarEnterView<T>(long id, object data, EAvaterType type) where T : CSAvater, new()
     {
         if (id == 0)
         {
@@ -80,11 +86,15 @@ public class CSScene : Singleton<CSScene>
         }
 
         CSAvater avater = GetAvater(id);
-        if (avater != null)
+        if (avater == null)
         {
-            //刷新的视野还在场景中,那么不进行创建,而是进行单位的刷新
-            return;
+            avater = GetPoolItem<T>(typeof(T));
         }
+        //刷新的视野还在场景中,那么不进行创建,而是进行单位的刷新
+        avater.InitData(data);
+
+        TryCreateAvater(avater, null);
+        //AddWaitDeal(avatar, TryCreateAvater, CreateAvatarInternal, null);
     }
 
     /// <summary>
@@ -93,7 +103,7 @@ public class CSScene : Singleton<CSScene>
     /// <typeparam name="T"></typeparam>
     /// <param name="type"></param>
     /// <returns></returns>
-    protected CSAvater GetPoolItem<T>(Type type) where T : CSAvater, new()
+    protected CSAvater GetPoolItem<T>(Type type) where T : CSAvater, new ()
     {
         if (CSObjectPoolMgr.Instance == null)
         {
@@ -105,9 +115,10 @@ public class CSScene : Singleton<CSScene>
         CSObjectPoolItem poolItem = CSObjectPoolMgr.Instance.GetAndAddPoolItem_Class_ProjectOverride(s, s, null, type, null);
         if (poolItem.objParam == null && type != null)
         {
-            poolItem.objParam = new T();
+            poolItem.objParam = CSAvater.Create<T>();
         }
         avater = poolItem.objParam as CSAvater;
+        avater.InitCreate();
         avater.PoolItem = poolItem;
         return avater;
     }
@@ -120,6 +131,20 @@ public class CSScene : Singleton<CSScene>
             return avater;
         }
         return null;
+    }
+
+    protected bool TryCreateAvater(object obj, object param)
+    {
+        CSAvater avater = obj as CSAvater;
+        if (avater == null)
+        {
+            return false;
+        }
+
+        //刷新模型
+        avater.Model.FlushModel();
+
+        return true;
     }
     #endregion
 }

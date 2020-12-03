@@ -6,19 +6,36 @@ using UnityEngine;
 
 public class ProjectPathEditorTool : IEditorTool
 {
-
     public ProjectPathEditorTool()
     {
         CSEditorPath.InitPath();
         PathDic = new Dictionary<string, List<CSEditorPath>>()
         {
-            { "工程设置路径", new List<CSEditorPath>(){
+            { "工程内路径", new List<CSEditorPath>(){
+
+                new CSEditorPath( EEditorPath.LocalTableProtoClassPath,"表格proto代码生成路径"),
+                new CSEditorPath( EEditorPath.LocalServerProtoClassPath,"服务器proto代码生成路径"),
+                new CSEditorPath( EEditorPath.LocalServerProtoFunctionPath,"服务器XML方法生成路径"),
+                new CSEditorPath( EEditorPath.LuaPath,"LUA脚本存放路径"),
+                
+            } },
+            { "本地资源路径", new List<CSEditorPath>(){
+                
+                new CSEditorPath( EEditorPath.ClientLoadRootPath,"本地资源根目录"),
                 new CSEditorPath( EEditorPath.LocalResourcesLoadPath,"本地资源读取路径"),
 
+                new CSEditorPath( EEditorPath.LocalTablePath,"XLS表格存放"),
+                new CSEditorPath( EEditorPath.LocalTableBytesPath,"表格bytes路径"),
+
+                new CSEditorPath( EEditorPath.LocalTableProtoPath,"表格proto路径"),
+
+                new CSEditorPath( EEditorPath.LocalServerProtoPath,"本地服务器Proto文件路径"),
+                new CSEditorPath( EEditorPath.LocalServerProtoXMLPath,"本地服务器ProtoXML文件路径"),
             } },
-            //{ "工具路径", new List<CSEditorPath>(){
-            //    new CSEditorPath(EEditorPath.ExcelTranslateToolFile,"表格工具"),
-            //} }
+            { "服务器资源路径", new List<CSEditorPath>(){
+                new CSEditorPath( EEditorPath.RealServerProtoPath,"外部服务器Proto文件路径"),
+                new CSEditorPath( EEditorPath.RealServerProtoXMLPath,"外部服务器ProtoXML文件路径"),
+            } }
         };
     }
 
@@ -85,7 +102,6 @@ public class ProjectPathEditorTool : IEditorTool
         }
     }
 
-
     private void ResetCf()
     {
         foreach (var pathList in PathDic)
@@ -96,6 +112,15 @@ public class ProjectPathEditorTool : IEditorTool
             }
         }
     }
+
+    public void Save()
+    {
+    }
+
+    public void Load()
+    {
+    }
+
     private static string _LocalResourcesLoadPath;
     public static string LocalResourcesLoadPath
     {

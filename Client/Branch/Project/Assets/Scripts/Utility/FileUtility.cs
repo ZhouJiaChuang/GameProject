@@ -93,6 +93,7 @@ public partial class Utility
 
     public static void DetectCreateDirectory(string path)
     {
+        if (string.IsNullOrEmpty(path)) return;
         int index = path.LastIndexOf(".");
         if (index == -1 || path.Substring(index).Contains("/"))
         {

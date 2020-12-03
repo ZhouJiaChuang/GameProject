@@ -53,13 +53,7 @@ public class UILayerManager : Singleton<UILayerManager>
         int t = (int)type;
         GameObject layerobj = mLayerDic[t];
 
-        CSAssist.SetParent(mLayerDic[t].transform, go);
-
-        RectTransform rectTransform = go.GetComponent<RectTransform>(); ;
-        rectTransform.anchorMax = Vector2.one;
-        rectTransform.anchorMin = Vector2.zero;
-        rectTransform.offsetMax = Vector2.zero;
-        rectTransform.offsetMin = Vector2.zero;
+        CSAssist.SetParent(mLayerDic[t].transform, go, true);
     }
 
 }
