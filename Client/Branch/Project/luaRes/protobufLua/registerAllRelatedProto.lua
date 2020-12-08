@@ -12,6 +12,15 @@ function LoadAllRelatedProto:LoadAll(protobufMgr)
     protobufMgr.RegisterPb("account.proto")
     ---未生成 account.proto 的lua=>C#文件
 
+    protobufMgr.RegisterPb("babel.proto")
+    ---未生成 babel.proto 的lua=>C#文件
+
+    protobufMgr.RegisterPb("character.proto")
+    ---未生成 character.proto 的lua=>C#文件
+
+    protobufMgr.RegisterPb("city.proto")
+    ---未生成 city.proto 的lua=>C#文件
+
     protobufMgr.RegisterPb("role.proto")
     ---未生成 role.proto 的lua=>C#文件
 

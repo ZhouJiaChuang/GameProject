@@ -14,7 +14,7 @@ UIMainUIObservationPanel.ObservationModel = nil
 
 function UIMainUIObservationPanel:Init()
     if(self.ObservationModel == nil) then
-        self.ObservationModel = luaclass.LuaObservationModel:New()
+        self.ObservationModel = luaClass.LuaObservationModel:New()
     end
     self.ObservationModel:Init(self:GetObservantRoleRoot())
 end

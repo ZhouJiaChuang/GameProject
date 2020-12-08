@@ -1,0 +1,33 @@
+package babel;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "BabelProto";
+
+message ResBabelData {
+  required int32 openLimit = 1; //通天塔的层数开启上限
+}
+
+message ReqBabelLevelData {
+  required int32 level = 1; //请求通天塔的层数
+}
+
+message ResBabelLevelData {
+  required int32 level = 1; //通天塔的层数
+  repeated BabelUnitData level = 1; //通天塔的层数
+}
+
+message BabelUnitData{
+	required int64 id = 1;//单位唯一ID
+	required int32 cid = 2;//单位配置ID,根据type的不同,去不同的表中读取相应的配置
+	required BabelUnitType type = 3;//单位类型
+	required int32 x = 4;//所在x轴坐标
+	required int32 y = 5;//所在y轴坐标
+	required int32 z = 6;//所在z轴坐标
+	required int32 rotate = 7;//单位8方向旋转
+}
+
+
+enum BabelUnitType {
+	None = 1;
+	Monster = 2;
+}

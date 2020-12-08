@@ -20,7 +20,7 @@ luaobject.__index = luaobject
 ---GC时执行
 ---@private
 ---@type function
-luaobject.__gc = luaclass.OnTableDestroyed
+luaobject.__gc = luaClass.OnTableDestroyed
 ---运行基类时对每层基类的调用进行计数,以确定元表的调用次数
 ---@private
 ---@type table

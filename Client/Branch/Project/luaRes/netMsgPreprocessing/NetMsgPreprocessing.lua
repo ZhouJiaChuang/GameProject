@@ -25,11 +25,22 @@ end
 --endregion
 
 --[[
---region ID:8001 ResPlayerBasicInfoMessage 玩家基本数据
+--region ID:12001 ResAllCharacterDataMessage 返回所有角色数据
 ---@param msgID LuaEnumNetDef 消息ID
 ---@param tblData table lua table类型消息数据
 ---@param csData userdata C# class类型消息数据(nil)
-netMsgPreprocessing[8001] = function(msgID, tblData, csData)
+netMsgPreprocessing[12001] = function(msgID, tblData, csData)
+    --在此处填入预处理代码
+end
+--endregion
+--]]
+
+--[[
+--region ID:12002 ResCharacterDataMessage 返回单个角色数据
+---@param msgID LuaEnumNetDef 消息ID
+---@param tblData table lua table类型消息数据
+---@param csData userdata C# class类型消息数据(nil)
+netMsgPreprocessing[12002] = function(msgID, tblData, csData)
     --在此处填入预处理代码
 end
 --endregion
@@ -40,3 +51,9 @@ require "luaRes.netMsgPreprocessing.NetMsgPreprocessing_Account"
 
 --role.xml
 require "luaRes.netMsgPreprocessing.NetMsgPreprocessing_Role"
+
+--city.xml
+require "luaRes.netMsgPreprocessing.NetMsgPreprocessing_City"
+
+--babel.xml
+require "luaRes.netMsgPreprocessing.NetMsgPreprocessing_Babel"

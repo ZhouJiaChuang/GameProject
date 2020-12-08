@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<messages id="12" queueId="2" package="com.sh.game.msg.system.character">
+	
+    <message id="1" type="toClient" class="ResAllCharacterDataMessage" proto="true" desc="返回所有角色数据">
+		<proto name="com.sh.game.proto.CharacterProto.ResAllCharacterData"/>
+    </message>
+	
+	
+    <message id="2" type="toClient" class="ResCharacterDataMessage" proto="true" desc="返回单个角色数据">
+		<proto name="com.sh.game.proto.CharacterProto.ResCharacterData"/>
+    </message>
+	
+
+</messages>

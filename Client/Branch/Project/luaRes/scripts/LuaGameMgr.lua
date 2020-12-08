@@ -1,6 +1,14 @@
 ---@class LuaGameMgr
 local LuaGameMgr = {}
 
+---@return LuaDataMgr
+function LuaGameMgr:GetDataMgr()
+    if(self.mLuaDataMgr == nil) then
+        self.mLuaDataMgr = luaClass.LuaDataMgr:New()
+    end
+end
+
+
 function LuaGameMgr:Initialize()
     self:BindEvent()
 end

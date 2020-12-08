@@ -1,0 +1,14 @@
+package character;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "CharacterProto";
+
+message ResAllCharacterData {
+  repeated ResCharacterData characters = 1;
+}
+
+message ResCharacterData{
+	required int32 id = 1;
+	required int32 cid = 2;
+	required int32 level = 3;
+}

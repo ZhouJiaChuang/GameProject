@@ -1,7 +1,7 @@
 ---@class LuaClassRegister lua的class脚本注册
 local LuaClassRegister = {}
 
-luaclass = {}
+luaClass = {}
 
 function LuaClassRegister:Init()
 
@@ -13,20 +13,35 @@ end
 
 function LuaClassRegister:LoadAllClassFiles()
     ---lua的展示脚本
-    luaclass.LuaObservationModel = require "luaRes.ui.extend.LuaObservationModel"
+    luaClass.LuaObservationModel = require "luaRes.ui.extend.LuaObservationModel"
+
+    luaClass.LuaDataMgr = require "scripts.data.LuaDataMgr"
+
+
+    --region 城市
+    ---城市管理类
+    luaClass.LuaCityMgr = require "scripts.data.city.LuaCityMgr"
+
+    luaClass.LuaCityBuildItem = require "scripts.data.city.build.LuaCityBuildItem"
+    --endregion
+
+    --region 通天塔
+    ---通天塔管理类
+    luaClass.LuaBabelMgr = require "scripts.data.babel.LuaBabelMgr"
+    --endregion
 end
 
 
 ---绑定所有元表
 ---@private
 function LuaClassRegister:BindAllMetatables()
-    for i, v in pairs(luaclass) do
+    for i, v in pairs(luaClass) do
         self:BindMetatable(v, i)
         --if luaDebugTool ~= nil then
         --    luaDebugTool.RecordTable(luaDebugTool.TableType.LuaClass, v)
         --end
     end
-    luaclass.__index = luaclass
+    luaClass.__index = luaClass
 end
 
 ---为单个表绑定元表

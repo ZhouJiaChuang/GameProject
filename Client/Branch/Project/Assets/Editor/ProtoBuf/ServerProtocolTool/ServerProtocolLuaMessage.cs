@@ -140,6 +140,10 @@ public class ServerProtocolLuaMessage : IEditorTool
             {
                 RefreshNetXLuaMethods();
             }
+            if (GUILayout.Button("更新ServerLua提示文件", GUILayout.Width(200)))
+            {
+                LuaHintCreator.UpdateLuaHintFile(Application.dataPath.Substring(0, Application.dataPath.Length - 6) + "luaRes/protobufLua/proto", "serverprotoreference.lua", true);
+            }
             EditorGUILayout.EndHorizontal();
             #endregion
         }

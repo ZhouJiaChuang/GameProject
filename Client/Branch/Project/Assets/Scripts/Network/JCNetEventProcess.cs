@@ -8,11 +8,11 @@ public class JCNetEventProcess : NetEventProcess
     protected override void ProcessEvent(int eventID, NetInfo obj)
     {
         base.ProcessEvent(eventID, obj);
-        switch ((ESocketEvent)eventID)
+        switch (eventID)
         {
-            case ESocketEvent.ConnectSuccess:
-                OnResConnectSuccess(obj);
-                break;
+            //case (int)ESocketEvent.ConnectSuccess:
+            //    OnResConnectSuccess(obj);
+            //    break;
         }
     }
 

@@ -34,7 +34,7 @@ public class CSScene : Singleton<CSScene>
 
     private void BindEvent()
     {
-        SocketEventHandler.AddEvent(ESocketEvent.ResUpdateViewPlayerMessage, OnResUpdateViewMessage);
+        //SocketEventHandler.AddEvent(ESocketEvent.ResUpdateViewPlayerMessage, OnResUpdateViewMessage);
     }
 
 

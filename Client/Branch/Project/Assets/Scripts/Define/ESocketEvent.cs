@@ -1,4 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿
+public enum ESocketEvent
+{
+    ConnectSuccess = 101,
+    ConnectFailed = 102,
+}

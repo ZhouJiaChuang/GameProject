@@ -134,21 +134,21 @@ public class EventHandlerManager : IEventHandlerManager
 
     #endregion
 
-    public void AddEvent(ESocketEvent uiEvtID, BaseEvent.Callback callback)
+    public void AddEvent(uint uiEvtID, BaseEvent.Callback callback)
     {
         Reg((uint)uiEvtID, callback);
     }
 
-    public void RemoveEvent(ESocketEvent uiEvitID)
+    public void RemoveEvent(uint uiEvitID)
     {
         UnReg((uint)uiEvitID);
     }
-    public void RemoveEvent(ESocketEvent uiEvitID, BaseEvent.Callback cb)
+    public void RemoveEvent(uint uiEvitID, BaseEvent.Callback cb)
     {
         UnReg((uint)uiEvitID, cb);
     }
 
-    public void SendEvent(ESocketEvent uiEvtID, params object[] objData)
+    public void SendEvent(uint uiEvtID, params object[] objData)
     {
         ProcEvent((uint)uiEvtID, objData);
     }

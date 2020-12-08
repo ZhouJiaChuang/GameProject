@@ -4,3 +4,7 @@ networkRequest = {}
 
 --account.xml
 require 'luaRes.protobufLua.networkRequest.NetworkRequest_Account'
+--city.xml
+require 'luaRes.protobufLua.networkRequest.NetworkRequest_City'
+--babel.xml
+require 'luaRes.protobufLua.networkRequest.NetworkRequest_Babel'

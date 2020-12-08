@@ -12,10 +12,5 @@ public class test : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            if (csscene == null) csscene = new CSScene();
-            CSNetwork.SendSocketEvent(ESocketEvent.ResUpdateViewPlayerMessage);
-        }
     }
 }

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<messages id="10" queueId="2" package="com.sh.game.msg.system.city">
+	
+    <message id="1" type="toClient" class="ResCityDataMessage" proto="true" desc="返回城市的所有数据">
+		<proto name="com.sh.game.proto.CityProto.ResCityData"/>
+    </message>
+	
+    <message id="2" type="toServer" class="ReqOpenTerrinAreaInfoMessage" proto="true" desc="请求开启地面区域">
+		<proto name="com.sh.game.proto.CityProto.ReqOpenTerrinAreaInfo"/>
+    </message>
+	
+    <message id="3" type="toClient" class="ResTerrainAreaInfoMessage" proto="true" desc="返回开启地面区域信息">
+		<proto name="com.sh.game.proto.CityProto.ResTerrainAreaInfo"/>
+    </message>
+	
+    <message id="4" type="toServer" class="ReqCreateBuildMessage" proto="true" desc="请求创建建筑">
+		<proto name="com.sh.game.proto.CityProto.ReqCreateBuild"/>
+    </message>
+	
+    <message id="5" type="toClient" class="ResBuildInfoMessage" proto="true" desc="返回创建建筑信息">
+		<proto name="com.sh.game.proto.CityProto.ResBuildInfo"/>
+    </message>
+	
+    <message id="6" type="toServer" class="ReqPutBuildMessage" proto="true" desc="请求摆放建筑">
+		<proto name="com.sh.game.proto.CityProto.ReqPutBuild"/>
+    </message>
+	
+    <message id="7" type="toServer" class="ReqRecycleBuildMessage" proto="true" desc="请求回收建筑">
+		<proto name="com.sh.game.proto.CityProto.ReqRecycleBuild"/>
+    </message>
+	
+    <message id="8" type="toServer" class="ReqBuildLevelUpMessage" proto="true" desc="请求建造等级提升">
+		<proto name="com.sh.game.proto.CityProto.ReqBuildLevelUp"/>
+    </message>
+	
+    <message id="9" type="toServer" class="ReqAccelerateBuildLevelMessage" proto="true" desc="请求加速建造等级">
+		<proto name="com.sh.game.proto.CityProto.ReqAccelerateBuildLevel"/>
+    </message>
+	
+    <message id="10" type="toServer" class="ReqFinishBuildLevelMessage" proto="true" desc="请求立即完成建造等级">
+		<proto name="com.sh.game.proto.CityProto.ReqFinishBuildLevel"/>
+    </message>
+
+</messages>

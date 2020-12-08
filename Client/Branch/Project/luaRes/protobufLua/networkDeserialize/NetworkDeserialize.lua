@@ -24,3 +24,7 @@ end
 require 'luaRes.protobufLua.networkDeserialize.NetworkDeserialize_Account'
 --role.xml
 require 'luaRes.protobufLua.networkDeserialize.NetworkDeserialize_Role'
+--city.xml
+require 'luaRes.protobufLua.networkDeserialize.NetworkDeserialize_City'
+--babel.xml
+require 'luaRes.protobufLua.networkDeserialize.NetworkDeserialize_Babel'

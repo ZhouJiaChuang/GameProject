@@ -7,6 +7,16 @@
       <isProtocolUsedInLua>true</isProtocolUsedInLua>
     </ProtocolControlCache_Protocol>
     <ProtocolControlCache_Protocol>
+      <protocolName>通天塔</protocolName>
+      <xmlName>babel</xmlName>
+      <isProtocolUsedInLua>true</isProtocolUsedInLua>
+    </ProtocolControlCache_Protocol>
+    <ProtocolControlCache_Protocol>
+      <protocolName>城市</protocolName>
+      <xmlName>city</xmlName>
+      <isProtocolUsedInLua>true</isProtocolUsedInLua>
+    </ProtocolControlCache_Protocol>
+    <ProtocolControlCache_Protocol>
       <protocolName>角色</protocolName>
       <xmlName>role</xmlName>
       <isProtocolUsedInLua>true</isProtocolUsedInLua>

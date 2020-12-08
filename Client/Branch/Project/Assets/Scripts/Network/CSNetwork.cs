@@ -20,17 +20,6 @@ public class CSNetwork : Singleton<CSNetwork>
     protected EventHandlerManager ClientEventHandler = new EventHandlerManager(EventHandlerManager.DispatchType.Event);
     protected EventHandlerManager SocketEventHandler = new EventHandlerManager(EventHandlerManager.DispatchType.Socket);
 
-    public static void SendClientEvent(EClientEvent e, params object[] param)
-    {
-        Instance.ClientEventHandler.SendEvent(e, param);
-    }
-
-    public static void SendSocketEvent(ESocketEvent e, params object[] param)
-    {
-        Instance.SocketEventHandler.SendEvent(e, param);
-    }
-
-
     private Thread thread;
     public bool IsAlive
     {

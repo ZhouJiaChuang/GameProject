@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<messages id="11" queueId="2" package="com.sh.game.msg.system.babel">
+	
+    <message id="1" type="toClient" class="ResBabelDataMessage" proto="true" desc="返回通天塔的基础数据">
+		<proto name="com.sh.game.proto.BabelProto.ResBabelData"/>
+    </message>
+	
+    <message id="2" type="toServer" class="ReqBabelLevelDataMessage" proto="true" desc="请求指定层的通天塔数据">
+		<proto name="com.sh.game.proto.BabelProto.ReqBabelLevelData"/>
+    </message>
+	
+	
+    <message id="3" type="toClient" class="ResBabelLevelDataMessage" proto="true" desc="返回指定层的通天塔数据">
+		<proto name="com.sh.game.proto.BabelProto.ResBabelLevelData"/>
+    </message>
+
+</messages>

@@ -1,0 +1,66 @@
+package city;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "CityProto";
+
+message ResCityData {
+	required int32 id = 1;//城市唯一ID
+	repeated ResTerrainAreaInfo TerrainAreaInfo = 2;//地面区域信息
+	repeated ResBuildInfo buildInfos = 3;//所有建筑信息
+}
+
+message ResTerrainAreaInfo{
+	required int32 id = 1;//区域ID
+	required int32 state = 2;//区域状态,0:已开启 1:未开启 2:正在开启
+	required int64 openTime = 3;//开启时间,这里指的是开启倒计时的结束时间戳(毫秒)
+}
+
+message ResBuildInfo{
+	required int32 id = 1;//建筑唯一ID
+	required int32 cid = 2;//建筑配置ID
+	required int32 x = 3;
+	required int32 y = 4;
+	required int32 rotate = 5;//摆放旋转方向
+	repeated int32 state = 6;//状态,0:建造中 1:升级中 2:正常
+	required int64 upTime = 7;//升级或者建造的结束时间
+}
+
+message ReqOpenTerrinAreaInfo{
+	required int32 id = 1;//区域ID
+}
+
+message ReqCreateBuild {
+	required int32 cid = 1;//建筑配置ID
+	required int32 x = 2;
+	required int32 y = 3;
+	required int32 rotate = 4;//摆放旋转方向
+}
+
+message ReqPutBuild {
+	required int32 id = 1;//建筑唯一ID
+	required int32 x = 2;
+	required int32 y = 3;
+	required int32 rotate = 4;//摆放旋转方向
+}
+
+message ReqRecycleBuild {
+	required int32 id = 1;//建筑唯一ID
+}
+
+message ReqBuildLevelUp {
+	required int32 id = 1;//请求升级
+}
+
+message ReqAccelerateBuildLevel{
+	required int32 id = 1;//建造ID
+	required int32 costItemId = 2;//加速所消耗的道具
+}
+
+message ReqFinishBuildLevel{
+	required int32 id = 1;//建造ID
+}
+
+
+
+
+

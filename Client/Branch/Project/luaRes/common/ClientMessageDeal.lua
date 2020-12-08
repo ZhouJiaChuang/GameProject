@@ -1238,7 +1238,7 @@ function ClientMessageDeal.OnCSMagicBossWarning_FocusOnEvent(id, data)
     if data == 0 then
         ---魔之boss消除预警
         uiStaticParameter.MagicBossInMainPlayerArea = false
-        luaclass.MagicBossDataInfo:TryOpenMagicBossPanel()
+        luaClass.MagicBossDataInfo:TryOpenMagicBossPanel()
     else
         ---魔之boss触发预警
         uiStaticParameter.MagicBossInMainPlayerArea = true

@@ -26,3 +26,7 @@ end
 require 'luaRes.protobufLua.networkRespond.NetworkRespond_Account'
 --role.xml
 require 'luaRes.protobufLua.networkRespond.NetworkRespond_Role'
+--city.xml
+require 'luaRes.protobufLua.networkRespond.NetworkRespond_City'
+--babel.xml
+require 'luaRes.protobufLua.networkRespond.NetworkRespond_Babel'

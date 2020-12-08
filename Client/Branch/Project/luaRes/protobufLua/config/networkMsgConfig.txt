@@ -4,3 +4,8 @@
 1002#OnResLoginAccountReceived
 1004#OnResLoginServerReceived
 2001#OnResPlayerBasicInfoMessageReceived
+10001#OnResCityDataMessageReceived
+10003#OnResTerrainAreaInfoMessageReceived
+10005#OnResBuildInfoMessageReceived
+11001#OnResBabelDataMessageReceived
+11003#OnResBabelLevelDataMessageReceived
